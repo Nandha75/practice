@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import InputFields from "./InputFields";
 import Options from "./Options";
 import HistoryTable from "./HistoryTable";
@@ -123,7 +123,7 @@ export default function App() {
 
   return (
     <div>
-      <BrowserRouter>
+      <Router>
         <Routes>
           <Route
             path="/"
@@ -204,28 +204,21 @@ export default function App() {
                   </Drawer>
                   <Main open={open}>
                     <DrawerHeader />
-                    <Routes>
-                      <Route
-                        path="/"
-                        element={
-                          <>
-                            <InputFields InputChange={InputChange} /><br />
-                            <Options OptionChange={OptionChange} selectedOption={selectedOption} />
-                            <p>
-                              <h3>Result: {result}</h3>
-                            </p>
-                          </>
-                        }
-                      />
-                      <Route path="/history" element={<HistoryTable history={history} />} />
-                    </Routes>
+                    <>
+                      <InputFields InputChange={InputChange} /><br />
+                      <Options OptionChange={OptionChange} selectedOption={selectedOption} />
+                      <p>
+                        <h3>Result: {result}</h3>
+                      </p>
+                    </>
                   </Main>
                 </Box>
               </>
             }
           />
+          <Route path="/history" element={<HistoryTable history={history} />} />
         </Routes>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }
